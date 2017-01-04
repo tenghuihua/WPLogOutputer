@@ -76,7 +76,7 @@
 /**
  log文件大小
  */
-+ (long)logFileSize;
++ (long long)logFileSize;
 @end
 
 

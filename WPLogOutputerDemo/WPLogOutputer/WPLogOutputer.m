@@ -417,9 +417,9 @@
 /**
  log文件大小(单位是byte)
  */
-+ (long)logFileSize {
++ (long long)logFileSize {
     NSError *error;
-    long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:&error] fileSize];
+    long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:&error] fileSize];
     if (error) {
         NSLog(@"%@",error);
     }
