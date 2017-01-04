@@ -6,3 +6,13 @@
 你值得拥有...
 使用简单
 ```
+先来几个图  
+
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo1.gif)  
+演示图1  
+
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo2.gif)  
+演示图2  
+
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo3.gif)  
+演示图3
