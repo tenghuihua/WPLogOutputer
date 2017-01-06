@@ -16,11 +16,8 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
-    
     // 开启打印
     [WPLogOutputer showLogOutputer];
-    
     return YES;
 }
 
