@@ -14,14 +14,18 @@
 ###先来几个图  
 ####注意截图由于掉帧的情况,导致在截图里看起来离线日志打印工具上的日志和Xcode里的日志同步不一致,其实是一致的,不信可以下载下来看效果
 
+日志信息
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo4.png)  
+ 
+演示图2 
 ![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo1.gif)  
-演示图1  
-
-![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo2.gif)  
-演示图2  
-
-![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo3.gif)  
+ 
 演示图3
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo2.gif)  
+  
+演示图4
+![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo3.gif)  
+
 
 
 
