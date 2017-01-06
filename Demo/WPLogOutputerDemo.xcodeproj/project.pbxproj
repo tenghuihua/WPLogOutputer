@@ -9,19 +9,21 @@
 /* Begin PBXBuildFile section */
 		412744561E1CA1A30093927A /* Anrik_Plist.plist in Resources */ = {isa = PBXBuildFile; fileRef = 412744551E1CA1A30093927A /* Anrik_Plist.plist */; };
 		4127445C1E1CA35E0093927A /* NSArray+HYBUnicodeReadable.m in Sources */ = {isa = PBXBuildFile; fileRef = 4127445B1E1CA35E0093927A /* NSArray+HYBUnicodeReadable.m */; };
+		41DC29B01E1F717900DA48FE /* WPLogOutputer.m in Sources */ = {isa = PBXBuildFile; fileRef = 41DC29AF1E1F717800DA48FE /* WPLogOutputer.m */; };
 		41EFE79E1E1C99500006CFE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EFE79D1E1C99500006CFE7 /* main.m */; };
 		41EFE7A11E1C99500006CFE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EFE7A01E1C99500006CFE7 /* AppDelegate.m */; };
 		41EFE7A41E1C99500006CFE7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EFE7A31E1C99500006CFE7 /* ViewController.m */; };
 		41EFE7A71E1C99500006CFE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EFE7A51E1C99500006CFE7 /* Main.storyboard */; };
 		41EFE7A91E1C99500006CFE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41EFE7A81E1C99500006CFE7 /* Assets.xcassets */; };
 		41EFE7AC1E1C99500006CFE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41EFE7AA1E1C99500006CFE7 /* LaunchScreen.storyboard */; };
-		41EFE7B61E1C99670006CFE7 /* WPLogOutputer.m in Sources */ = {isa = PBXBuildFile; fileRef = 41EFE7B51E1C99670006CFE7 /* WPLogOutputer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		412744551E1CA1A30093927A /* Anrik_Plist.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Anrik_Plist.plist; sourceTree = "<group>"; };
 		4127445A1E1CA35E0093927A /* NSArray+HYBUnicodeReadable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+HYBUnicodeReadable.h"; sourceTree = "<group>"; };
 		4127445B1E1CA35E0093927A /* NSArray+HYBUnicodeReadable.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+HYBUnicodeReadable.m"; sourceTree = "<group>"; };
+		41DC29AE1E1F717800DA48FE /* WPLogOutputer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPLogOutputer.h; sourceTree = "<group>"; };
+		41DC29AF1E1F717800DA48FE /* WPLogOutputer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPLogOutputer.m; sourceTree = "<group>"; };
 		41EFE7991E1C99500006CFE7 /* WPLogOutputerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WPLogOutputerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		41EFE79D1E1C99500006CFE7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		41EFE79F1E1C99500006CFE7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -32,8 +34,6 @@
 		41EFE7A81E1C99500006CFE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		41EFE7AB1E1C99500006CFE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		41EFE7AD1E1C99500006CFE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		41EFE7B41E1C99670006CFE7 /* WPLogOutputer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WPLogOutputer.h; sourceTree = "<group>"; };
-		41EFE7B51E1C99670006CFE7 /* WPLogOutputer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WPLogOutputer.m; sourceTree = "<group>"; };
 		41EFE7B71E1C99A80006CFE7 /* Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		41EFE7B81E1C99A80006CFE7 /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -49,6 +49,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		41DC29AD1E1F717800DA48FE /* WPLogOutputer */ = {
+			isa = PBXGroup;
+			children = (
+				41DC29AE1E1F717800DA48FE /* WPLogOutputer.h */,
+				41DC29AF1E1F717800DA48FE /* WPLogOutputer.m */,
+			);
+			path = WPLogOutputer;
+			sourceTree = "<group>";
+		};
 		41EFE7901E1C99500006CFE7 = {
 			isa = PBXGroup;
 			children = (
@@ -68,7 +77,7 @@
 		41EFE79B1E1C99500006CFE7 /* WPLogOutputerDemo */ = {
 			isa = PBXGroup;
 			children = (
-				41EFE7B31E1C99670006CFE7 /* WPLogOutputer */,
+				41DC29AD1E1F717800DA48FE /* WPLogOutputer */,
 				41EFE79F1E1C99500006CFE7 /* AppDelegate.h */,
 				41EFE7A01E1C99500006CFE7 /* AppDelegate.m */,
 				41EFE7A21E1C99500006CFE7 /* ViewController.h */,
@@ -93,15 +102,6 @@
 				41EFE79D1E1C99500006CFE7 /* main.m */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		41EFE7B31E1C99670006CFE7 /* WPLogOutputer */ = {
-			isa = PBXGroup;
-			children = (
-				41EFE7B41E1C99670006CFE7 /* WPLogOutputer.h */,
-				41EFE7B51E1C99670006CFE7 /* WPLogOutputer.m */,
-			);
-			path = WPLogOutputer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,7 +181,7 @@
 				41EFE7A11E1C99500006CFE7 /* AppDelegate.m in Sources */,
 				41EFE79E1E1C99500006CFE7 /* main.m in Sources */,
 				4127445C1E1CA35E0093927A /* NSArray+HYBUnicodeReadable.m in Sources */,
-				41EFE7B61E1C99670006CFE7 /* WPLogOutputer.m in Sources */,
+				41DC29B01E1F717900DA48FE /* WPLogOutputer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

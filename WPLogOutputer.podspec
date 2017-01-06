@@ -19,7 +19,6 @@ Pod::Spec.new do |s|
   s.author             = { "Anrik_gwp" => "anrik_gwp@163.com" }
   s.platform     = :ios, "7.0"
   s.source       = { :git => "https://github.com/anrikgwp/WPLogOutputer.git", :tag => s.version }
-  s.source_files  = "Classes" ,"WPLogOutputerDemo/WPLogOutputer/*.{h,m}"
-  s.exclude_files = "Classes/Exclude"
+  s.source_files  = "WPLogOutputer" ,"WPLogOutputer/*.{h,m}"
   s.requires_arc = true
 end
