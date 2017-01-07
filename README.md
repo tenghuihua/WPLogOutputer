@@ -30,8 +30,12 @@
 
 
 #   用法简介
+###【使用CocoaPods】
+```
+pod 'WPLogOutputer'
+```
 
-###【手动导入】
+###【或者手动导入】
 - 【直接下载源代码,将`WPLogOutputer`文件夹拽入项目中】
 
 
