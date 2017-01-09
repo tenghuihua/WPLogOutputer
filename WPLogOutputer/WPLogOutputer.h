@@ -17,7 +17,7 @@
 // 自定义Log
 //#define kAppStore // 上架到appStore开关,打开就说明要上架到appStore
 //#ifndef  kAppStore
- #define NSLog(FORMAT, ...) {fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",[NSString stringWithFormat:FORMAT, ##__VA_ARGS__]]]];}
+#define NSLog(FORMAT, ...) {NSString *log = [NSString stringWithFormat:FORMAT, ##__VA_ARGS__];fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [log UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",log]]];}
  #else
  #define NSLog(FORMAT, ...)  {[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",[NSString stringWithFormat:FORMAT, ##__VA_ARGS__]]]];}
  #endif

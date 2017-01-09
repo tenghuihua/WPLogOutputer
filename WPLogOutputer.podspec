@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name         = "WPLogOutputer"
-  s.version      = "0.0.3"
+  s.version      = "0.0.4"
   s.summary      = "离线日志打印神器"
   s.homepage     = "https://github.com/anrikgwp/WPLogOutputer"
   s.license      = "MIT"
