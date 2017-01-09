@@ -8,9 +8,7 @@
 #import "WPLogOutputer.h"
 
 @interface LogInfo : NSObject
-/** log产生的时间 */
 @property (nonatomic, strong) NSDate *logTime;
-/** log */
 @property (nonatomic, copy) NSString* log;
 @end
 
@@ -18,7 +16,6 @@
 @end
 
 @interface WPWindow : UIWindow
-/** log窗口的活动范围 */
 @property (nonatomic,assign) CGRect freeRect;
 @end
 
@@ -35,7 +32,6 @@
         self.backgroundColor = [UIColor colorWithWhite:0.2 alpha:0.5];
         self.windowLevel = UIWindowLevelStatusBar + 100.0;
 //        self.windowLevel = UIWindowLevelAlert;
-        
         UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(dragAction:)];
         [self addGestureRecognizer:panGestureRecognizer];
     }
@@ -53,12 +49,8 @@
         case UIGestureRecognizerStateChanged:
         {
             CGPoint point = [ges translationInView:self];
-            float dx;
-            float dy;
-            dx = point.x - self.startPoint.x;
-            dy = point.y - self.startPoint.y;
-            
-            // 计算移动后的view中心点
+            // float dx = point.x - self.startPoint.x;
+            float dy = point.y - self.startPoint.y;
             // CGPoint newcenter = CGPointMake(self.center.x + dx, self.center.y + dy);
             CGPoint newcenter = CGPointMake([UIScreen mainScreen].bounds.size.width / 2, self.center.y + dy);
             self.center = newcenter;
@@ -96,12 +88,9 @@
 @end
 
 @interface WPLogOutputViewController : UIViewController
-@property (nonatomic, weak) WPWindow* hostWindow;// 一定要用weak修饰
+@property (nonatomic, weak) WPWindow* hostWindow;
 - (void)printLog:(NSString*)newLog;
-/** 日志文件路径 */
 - (NSString *)wp_LogPath;
-
-/** 保存日志 */
 - (void)saveLog:(UIButton *)sender;
 @end
 
@@ -131,7 +120,7 @@
     self.printAttributedString = [[NSMutableAttributedString alloc]init];
     self.logMuStr = [[NSMutableString alloc]init];
     self.startTime = [NSDate date];
-    
+    self.sizeLab.text = [NSString stringWithFormat:@"%.2fKb",[[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:nil] fileSize]/ 1024.0];
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
         if (self.isFirstSave) {
             NSFileManager *fileM = [NSFileManager defaultManager];
@@ -262,6 +251,9 @@
         }else {
             WPLog(@"日志保存成功");
         }
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.sizeLab.text = [NSString stringWithFormat:@"%.2fKb",[[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:nil] fileSize]/ 1024.0];
+        });
     });
 }
 
@@ -299,36 +291,41 @@
 }
 
 - (void)printLog:(NSString*)newLog {
-    if (newLog.length == 0)
+    // 判断字符串是否为空
+#define kwpStringIsEmpty(str) ([str isKindOfClass:[NSNull class]] || str == nil || [str length] < 1 ? YES : NO )
+    if (kwpStringIsEmpty(newLog)){
         return;
-    
-    LogInfo *info = [[LogInfo alloc]init];
-    info.log = newLog;
-    info.logTime = [NSDate date];
-    [self.logs addObject:info];
-    
-    UIColor *color;
-    if (self.isAnother) {
-        self.isAnother = NO;
-        color = [UIColor whiteColor];
-    }else {
-        self.isAnother = YES;
-        color = [UIColor yellowColor];
     }
     
     dispatch_async(dispatch_get_global_queue(0, 0), ^{
+        LogInfo *info = [[LogInfo alloc]init];
+        info.log = newLog;
+        info.logTime = [NSDate date];
+        [self.logs addObject:info];
+        UIColor *color;
+        if (self.isAnother) {
+            self.isAnother = NO;
+            color = [UIColor whiteColor];
+        }else {
+            self.isAnother = YES;
+            color = [UIColor yellowColor];
+        }
+        
         NSMutableAttributedString* logString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"\n%@",newLog]];
         [logString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0, logString.length)];
         [self.printAttributedString appendAttributedString:logString];
-        
         NSString *logTime = [self wp_stringDateWith:info.logTime];
         [self.logMuStr appendString:[NSString stringWithFormat:@"\n%@:%@",logTime,info.log]];
-        
         dispatch_async(dispatch_get_main_queue(), ^{
-            self.logTextView.attributedText = self.printAttributedString;
-            NSRange bottom = NSMakeRange(self.printAttributedString.length, 1);
-            [self.logTextView scrollRangeToVisible:bottom];
-            self.sizeLab.text = [NSString stringWithFormat:@"%.2fKb",[[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:nil] fileSize]/ 1024.0];
+            @autoreleasepool {
+                //**************解决短时间内打印出现的bug********************/
+                NSAttributedString *attributedText = [self.printAttributedString copy];
+                self.logTextView.attributedText = attributedText;
+                if (attributedText.length >0) {
+                    NSRange bottom = NSMakeRange(attributedText.length, 1);
+                    [self.logTextView scrollRangeToVisible:bottom];
+                }
+            }
         });
     });
 }
@@ -338,7 +335,6 @@
     return wp_LogPath;
 }
 
-// 日志文件夹路径
 - (NSString *)wp_LogFilePath {
     NSString *wp_LogFilePath = [NSString stringWithFormat:@"%@/wp_Log", NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES)[0]];
     if (![[NSFileManager defaultManager] fileExistsAtPath:wp_LogFilePath]) {
@@ -403,21 +399,16 @@
     logOutputer.logWindow.freeRect = freeRect;
 }
 
-/** 保存日志 */
 + (void)saveLog {
     WPLogOutputer *logOutputer = [WPLogOutputer sharedManager];
     [logOutputer.logController saveLog:nil];
 }
 
-/** 日志文件夹 */
 + (NSString *)wp_LogPath {
     WPLogOutputer *logOutputer = [WPLogOutputer sharedManager];
     return [logOutputer.logController wp_LogPath];
 }
 
-/**
- log文件大小(单位是byte)
- */
 + (long long)logFileSize {
     NSError *error;
     long long fileSize = [[[NSFileManager defaultManager] attributesOfItemAtPath:[self wp_LogPath] error:&error] fileSize];

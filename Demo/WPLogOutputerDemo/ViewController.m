@@ -22,7 +22,7 @@
     NSLog(@"%@",self.array);
     
     CADisplayLink *theTimer = [CADisplayLink displayLinkWithTarget:self selector:@selector(print)];
-    theTimer.frameInterval = 60;
+    theTimer.frameInterval = 30;
     [theTimer addToRunLoop: [NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];
     
     UITapGestureRecognizer *singleFingerOne = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(fingerIncident:)];
@@ -39,5 +39,4 @@
 - (void)print {
     NSLog(@"%@",self.array[arc4random()%self.array.count]);
 }
-
 @end

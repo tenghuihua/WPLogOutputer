@@ -12,7 +12,6 @@
 
 
 ###先来几个图  
-####注意截图由于掉帧的情况,导致在截图里看起来离线日志打印工具上的日志和Xcode里的日志同步不一致,其实是一致的,不信可以下载下来看效果
 
 日志信息  
 ![image](https://github.com/anrikgwp/WPLogOutputer/blob/master/demoImages/demo4.png)  
@@ -45,7 +44,7 @@ pod 'WPLogOutputer'
  
 ```Objective-C
 //#ifndef  kAppStore
- #define NSLog(FORMAT, ...) {fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",[NSString stringWithFormat:FORMAT, ##__VA_ARGS__]]]];}
+ #define NSLog(FORMAT, ...) {NSString *log = [NSString stringWithFormat:FORMAT, ##__VA_ARGS__];fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [log UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",log]]];}
  #else
  #define NSLog(FORMAT, ...)  nil
  #endif
