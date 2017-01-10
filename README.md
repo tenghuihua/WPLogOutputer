@@ -40,15 +40,17 @@ pod 'WPLogOutputer'
 
 ###【具体用法】
 1. 为了方便全局使用在`PrefixHeader.pch`导入主头文件：`#import "WPLogOutputer.h"`
-2. 习惯在项目中全局重写`NSLog`,以便打印出我们想要的日志格式,方便找出日志打印所在的代码行
+2. 习惯在项目中类似全局`Macro.h`文件中全局重写`NSLog`  
+	- a.只要在项目中调用`NSLog(FORMAT, ...)`即可在Xcode控制台和日志打印神器上同步输出
+	- b.可以打印出我们想要的日志格式,方便找出日志打印所在的代码行
  
 ```Objective-C
-//#ifndef  kAppStore
- #define NSLog(FORMAT, ...) {NSString *log = [NSString stringWithFormat:FORMAT, ##__VA_ARGS__];fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [log UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",log]]];}
- #else
- #define NSLog(FORMAT, ...)  nil
- #endif
-
+//#define kAppStore // 上架到appStore开关,打开就说明日志不会同步到WPLogOutputer
+#ifndef  kAppStore
+#define NSLog(FORMAT, ...) {NSString *log = [NSString stringWithFormat:FORMAT, ##__VA_ARGS__];fprintf(stderr,"\n%s %d -> %s\n", __FUNCTION__, __LINE__, [log UTF8String]);[WPLogOutputer printLog:[NSString stringWithFormat:@"%s<Line:%d>:%@", __FUNCTION__, __LINE__,[NSString stringWithFormat:@"%@",log]]];}
+#else
+#define NSLog(FORMAT, ...)  nil
+#endif
 ```
 3.在适当时候将日志打印工具显示出来,如在AppDelegate中开启日志打印控件
 
@@ -62,7 +64,7 @@ pod 'WPLogOutputer'
 }
 
 ```
-- 但通常是我们不需要日志打印神器,而是在某个时刻我们让他出现,再此笔者推荐以下做法
+- 但通常是我们不需要日志打印神器,而是在某个时刻我们让它出现进行调试,再此笔者推荐以下做法
 
 ```
  // 推荐做法
@@ -86,6 +88,7 @@ pod 'WPLogOutputer'
 
 使用就是这样么轻松!
 
+###具体用法参考Demo 
 
 ## 期待
 * 第一次开源,多有不足,忘多多指教!
